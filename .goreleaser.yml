@@ -6,13 +6,14 @@ builds:
     ignore:
       - goos: darwin
         goarch: 386
-archive:
-  replacements:
-    darwin: osx
-    linux: linux
-    windows: windows
-    386: i386
-    amd64: x86_64
+archives:
+  - id: release
+    replacements:
+      darwin: osx
+      linux: linux
+      windows: windows
+      386: i386
+      amd64: x86_64
 checksum:
   name_template: 'checksums.txt'
 snapshot:
@@ -23,7 +24,7 @@ changelog:
     exclude:
       - '^docs:'
       - '^test:'
-brew:
+brews:
   github:
     owner: relvacode
     name: homebrew-urlsplit
