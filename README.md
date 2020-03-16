@@ -2,6 +2,22 @@
 
 A tool to enable script processing of URLs
 
+
+### Install
+
+#### Homebrew
+
+```
+brew tap relvacode/urlsplit
+brew install urlsplit
+```
+
+#### Linux / Docker
+
+```
+curl --fail -L https://github.com/relvacode/urlsplit/releases/download/0.2/urlsplit_0.2_linux_x86_64.tar.gz | sudo tar -xzf - -C /usr/bin
+```
+
 ### Usage
 
 #### Export Environment Variables

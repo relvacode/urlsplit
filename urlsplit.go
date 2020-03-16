@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"io"
-	"log"
 	"net/url"
 	"os"
 
@@ -74,8 +73,10 @@ type Options struct {
 }
 
 func Main() error {
-	var options = new(Options)
-	_, err := flags.Parse(options)
+	var options Options
+
+	p := flags.NewParser(&options, flags.HelpFlag)
+	_, err := p.Parse()
 	if err != nil {
 		return err
 	}
@@ -132,6 +133,7 @@ func Main() error {
 func main() {
 	err := Main()
 	if err != nil {
-		log.Fatal(err)
+		fmt.Fprintln(os.Stderr, err)
+		os.Exit(1)
 	}
 }
