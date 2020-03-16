@@ -2,9 +2,9 @@
 
 A tool to enable script processing of URLs
 
-## Usage
+### Usage
 
-### Export Environment Variables
+#### Export Environment Variables
 
 You can export a set of environment variables using the `-e` option.
 This will print a set of export statements that can be evaluated by your shell.
@@ -29,7 +29,7 @@ export "URL_FRAGMENT="
 export "URL_QUERY_query=yes"
 ```
 
-### Get a Specific Key
+#### Get a Specific Key
 
 Use the `-k` option combined with a key name to print that specific value.
 
@@ -42,10 +42,12 @@ $ urlsplit -k URL_HOST 'http://username:password@example.org/path?query=yes'
 example.org
 ```
 
-### Render a Template
+#### Render a Template
 
 Using the `-f` option you can render a Django-style template from URL parameters.
 Useful for printing conditionally or generating command line arguments.
+
+Check out [the Django template language](https://docs.djangoproject.com/en/dev/topics/templates/#the-django-template-language) for details on how to use this syntax.
 
 ```
 urlsplit -f <TEMPLATE> <URL>
