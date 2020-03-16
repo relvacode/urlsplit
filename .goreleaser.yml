@@ -26,5 +26,5 @@ changelog:
       - '^test:'
 brews:
   - github:
-    owner: relvacode
-    name: homebrew-urlsplit
+      owner: relvacode
+      name: homebrew-urlsplit
