@@ -25,6 +25,6 @@ changelog:
       - '^docs:'
       - '^test:'
 brews:
-  github:
+  - github:
     owner: relvacode
     name: homebrew-urlsplit
