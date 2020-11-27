@@ -1,8 +1,10 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
 	"io"
+	"io/ioutil"
 	"net/url"
 	"os"
 	"strings"
@@ -77,8 +79,8 @@ type Options struct {
 	Key    *string `short:"k" long:"key" description:"Print the value of this key"`
 	Format *string `short:"f" long:"format" description:"Render a template. Use {{key}} to replace values in the template"`
 	URL    struct {
-		URL string `description:"The URL to parse"`
-	} `positional-args:"yes" required:"yes"`
+		URL *string `description:"The URL to parse. URL taken from STDIN if not supplied"`
+	} `positional-args:"yes"`
 }
 
 func Main() error {
@@ -90,7 +92,22 @@ func Main() error {
 		return err
 	}
 
-	u, err := url.Parse(options.URL.URL)
+	var input string
+
+	if options.URL.URL != nil {
+		input = *options.URL.URL
+	} else {
+		b, err := ioutil.ReadAll(os.Stdin)
+		_ = os.Stdin.Close()
+
+		if err != nil {
+			return fmt.Errorf("Unable to read data from STDIN: %s", err)
+		}
+
+		input = string(bytes.TrimSpace(b))
+	}
+
+	u, err := url.Parse(input)
 	if err != nil {
 		return err
 	}
