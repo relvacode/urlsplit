@@ -5,10 +5,19 @@ import (
 	"io"
 	"net/url"
 	"os"
+	"strings"
 
 	"github.com/jessevdk/go-flags"
 	"gopkg.in/flosch/pongo2.v3"
 )
+
+func filterTrimPath(in *pongo2.Value, _ *pongo2.Value) (*pongo2.Value, *pongo2.Error) {
+	return pongo2.AsValue(strings.Trim(in.String(), "/")), nil
+}
+
+func init() {
+	pongo2.RegisterFilter("trimpath", filterTrimPath)
+}
 
 // A Var is a key matched with its value
 type Var struct {
@@ -66,7 +75,7 @@ func EnvVars(u *url.URL) Vars {
 type Options struct {
 	Export bool    `short:"e" long:"export" description:"Print URL variables as a set of export statements"`
 	Key    *string `short:"k" long:"key" description:"Print the value of this key"`
-	Format *string `short:"f" long:"format" description:"Render a template"`
+	Format *string `short:"f" long:"format" description:"Render a template. Use {{key}} to replace values in the template"`
 	URL    struct {
 		URL string `description:"The URL to parse"`
 	} `positional-args:"yes" required:"yes"`

@@ -60,7 +60,7 @@ example.org
 
 #### Render a Template
 
-Using the `-f` option you can render a Django-style template from URL parameters.
+Using the `-f` option you can render a Django-style template from URL parameters using the [Pongo2](https://github.com/flosch/pongo2) template rendering engine.
 Useful for printing conditionally or generating command line arguments.
 
 Check out [the Django template language](https://docs.djangoproject.com/en/dev/topics/templates/#the-django-template-language) for details on how to use this syntax.
@@ -70,6 +70,18 @@ urlsplit -f <TEMPLATE> <URL>
 ```
 
 ```
-$ urlsplit -f 'pg_isready -h {{URL_HOSTNAME}}{% if URL_PORT %} -p {{URL_PORT}}{% endif %}{% if URL_USERNAME %} -U {{URL_USERNAME}}{% endif %}' 'postgres://postgres:root@localhost/postgres'
+$ urlsplit -f 'pg_isready -h {{ URL_HOSTNAME }}{% if URL_PORT %} -p {{ URL_PORT }}{% endif %}{% if URL_USERNAME %} -U {{ URL_USERNAME }}{% endif %}' 'postgres://postgres:root@localhost/postgres'
 pg_isready -h localhost -U postgres
 ```
+
+
+```
+$ urlsplit -f 'bucket: {{URL_HOSTNAME}}  key: {{ URL_PATH | trimpath }}' s3://bucket/path/object.txt
+bucket: bucket  key: path/object.txt
+```
+
+##### Filters
+
+| | |
+| ----- | ---- |
+| `trimpath` | Trims `/` from the start and end of the input |
