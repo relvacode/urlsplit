@@ -15,7 +15,7 @@ brew install urlsplit
 #### Linux / Docker
 
 ```
-curl --fail -L https://github.com/relvacode/urlsplit/releases/download/0.3/urlsplit_0.2_linux_x86_64.tar.gz | sudo tar -xzf - -C /usr/bin urlsplit
+curl --fail -L https://github.com/relvacode/urlsplit/releases/download/0.3/urlsplit_0.3_linux_x86_64.tar.gz | sudo tar -xzf - -C /usr/bin urlsplit
 ```
 
 ### Usage
